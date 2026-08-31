@@ -1,0 +1,41 @@
+# Environment
+.env
+venv/
+env/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Data (raw datasets are large / not committed)
+data/raw/*
+!data/raw/.gitkeep
+!data/raw/fabric_defect/.gitkeep
+!data/raw/ppe_safety/.gitkeep
+!data/raw/mvtec_ad/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# DB
+storage/*.db
+storage/*.sqlite3
+
+# Model checkpoints
+*.pt
+*.pth
+*.ckpt
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# Testing/Linting/Logs
+*.log
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+build/
+dist/
+*.egg-info/

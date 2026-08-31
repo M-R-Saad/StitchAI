@@ -1,0 +1,40 @@
+# ---- Backend / API ----
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+python-multipart==0.0.9
+pydantic==2.9.2
+python-dotenv==1.0.1
+
+# ---- Frontend ----
+streamlit==1.38.0
+
+# ---- Model backbone (AnomalyCLIP / CLIP-based) ----
+#torch==2.4.1
+torch==2.5.1 
+#torchvision==0.19.1
+torchvision==0.20.1 
+open_clip_torch==2.26.1
+ftfy==6.2.3
+regex==2024.7.24
+
+# ---- Image handling ----
+Pillow==10.4.0
+opencv-python-headless==4.10.0.84
+numpy==1.26.4
+
+# ---- Explanation layer (Gemini Flash) ----
+#google-generativeai==0.8.1
+google-genai>=1.0.0
+
+# ---- Storage ----
+SQLAlchemy==2.0.34
+
+# ---- Evaluation / baselines ----
+scikit-learn==1.5.1
+pandas==2.2.2
+matplotlib==3.9.2
+
+# ---- Utilities ----
+requests==2.32.3
+pyyaml==6.0.2
+tqdm==4.66.5

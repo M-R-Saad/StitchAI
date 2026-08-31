@@ -1,0 +1,24 @@
+# Backbone + per-category configuration.
+# Thresholds start hardcoded (Phase 1) and become a real configurable setting in Phase 5.
+
+model:
+  name: AnomalyCLIP
+  visual_encoder: ViT-L-14-336
+  checkpoint_path: backbone/anomalyclip/checkpoints/9_12_4_multiscale/epoch_15.pth   # fill in once you have a checkpoint / pretrained weights path
+  device: cuda            # cuda | cpu
+
+categories:
+  fabric:
+    reference_bank_dir: data/reference_bank/fabric
+    #threshold: 0.5         # placeholder — tune in Phase 1
+    threshold: 0.9   # data-driven from Phase 1 sampling: good max=0.89, line min=0.95
+    enabled: true
+  safety:
+    reference_bank_dir: data/reference_bank/safety
+    threshold: 0.5
+    enabled: false          # flip on in Phase 3
+  machinery:
+    reference_bank_dir: data/reference_bank/machinery
+    threshold: 0.99   # data-driven: good max=0.9893, scratch mean=0.9906 (see PROGRESS.md)
+    enabled: true          # flip on in Phase 4 — proof-of-concept / proxy data (MVTec-AD)
+    proof_of_concept: true
