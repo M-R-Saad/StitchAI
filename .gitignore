@@ -24,6 +24,10 @@ storage/*.sqlite3
 *.pth
 *.ckpt
 
+# AnomalyCLIP backbone (large files)
+backbone/anomalyclip/checkpoints/
+backbone/anomalyclip/results/
+
 # OS / editor
 .DS_Store
 .vscode/
