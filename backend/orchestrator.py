@@ -79,7 +79,7 @@ def _write_log(category: str, score: float, verdict: str, image_ref: str):
         db.close()
 
 
-def run_inference(image_path: str, category: str) -> dict:
+def run_inference(image_path: str, category: str, original_filename: str = None) -> dict:
     """
     Full pipeline for one uploaded image. Returns a dict matching
     backend.schemas.InferenceResponse (minus heatmap_url, which the route layer fills
@@ -105,7 +105,8 @@ def run_inference(image_path: str, category: str) -> dict:
     if verdict == "anomalous":
         explanation = explain_anomaly(category=category, score=result.score)
 
-    _write_log(category=category, score=result.score, verdict=verdict, image_ref=image_path)
+    log_ref = original_filename if original_filename else image_path
+    _write_log(category=category, score=result.score, verdict=verdict, image_ref=log_ref)
 
     payload = {
         "category": category,

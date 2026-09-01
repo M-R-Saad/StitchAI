@@ -64,8 +64,10 @@ class AnomalyCLIPWrapper:
         startup - this is the slow step (downloading/loading the CLIP backbone and
         checkpoint), so it must not run per-request."""
         import sys
-
         import torch
+
+        if self.device == "cuda" and not torch.cuda.is_available():
+            self.device = "cpu"
 
         # backbone/anomalyclip/ is a vendored git clone, not an installed package -
         # its modules (AnomalyCLIP_lib, prompt_ensemble, utils) only import correctly

@@ -19,7 +19,7 @@ async def infer(category: str = Form(...), image: UploadFile = File(...)):
         tmp_path = tmp.name
 
     try:
-        result = run_inference(tmp_path, category)
+        result = run_inference(tmp_path, category, original_filename=image.filename)
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except NotImplementedError as e:
