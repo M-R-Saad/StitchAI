@@ -1,0 +1,3 @@
+[submodule "backbone/anomalyclip"]
+	path = backbone/anomalyclip
+	url = https://github.com/zqhang/AnomalyCLIP.git
