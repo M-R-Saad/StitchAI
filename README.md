@@ -38,16 +38,20 @@ anomaly score. This is an inspection aid for a human reviewer, not an autonomous
 ### Additional defect samples
 
 These uploaded fabric samples contain visible surface defects detected during inspection.
-They are shown as input examples; the model's localization output is shown above.
+Each input is shown beside its corresponding anomaly heatmap.
 
 <p align="center">
-  <img src="docs/images/defect_image1.png" alt="Fabric sample with two defects" width="320" />
-  <img src="docs/images/defect_image2.png" alt="Fabric sample with one defect" width="320" />
+  <img src="docs/images/defect_image1.png" alt="Fabric sample with two defects" width="250" />
+  <img src="docs/images/fabric-defect-heatmap.png" alt="Heatmap for two fabric defects" width="250" />
+  <img src="docs/images/defect_image2.png" alt="Fabric sample with one defect" width="250" />
+  <img src="docs/images/defect_image2-heatmap.png" alt="Heatmap for one fabric defect" width="250" />
 </p>
 
 <p align="center">
-  <em>Two defect regions</em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <em>Single defect region</em>
+  <em>Two defects</em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <em>Two-defect heatmap</em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <em>One defect</em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <em>Single-defect heatmap</em>
 </p>
 
 ### Other inspection categories
