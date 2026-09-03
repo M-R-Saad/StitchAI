@@ -5,8 +5,6 @@
 
 **Team HexaMind** · United International University · BCOLBD 2026 AI Category
 
-![StitchAI fabric anomaly detection](docs/images/fabric-anomaly-heatmap.png)
-
 StitchAI combines one AnomalyCLIP backbone with small category-specific reference banks.
 Upload an image through the Streamlit dashboard, receive a normal/anomalous verdict and
 score, inspect the heatmap, and keep the result in a unified audit log.
@@ -19,38 +17,29 @@ score, inspect the heatmap, and keep the result in a unified audit log.
 | Worker safety | PPE and unsafe visual conditions | `data/reference_bank/safety/` |
 | Machinery | Wear and surface anomalies | `data/reference_bank/machinery/` |
 
-## Example output
-
-The left image is the uploaded fabric sample. The right image is the model's anomaly
-heatmap overlay; warmer colors indicate regions that contributed more strongly to the
-anomaly score. This is an inspection aid for a human reviewer, not an autonomous decision.
-
-<p align="center">
-  <img src="docs/images/fabric-reference.png" alt="Fabric reference image" width="320" />
-  <img src="docs/images/fabric-anomaly-heatmap.png" alt="Fabric anomaly heatmap" width="320" />
-</p>
-
-<p align="center">
-  <em>Fabric input</em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <em>Anomaly heatmap overlay</em>
-</p>
-
-### Additional defect samples
+## Defect examples
 
 These uploaded fabric samples contain visible surface defects detected during inspection.
-Each input is shown beside its corresponding anomaly heatmap.
+Each real input is shown beside its corresponding anomaly heatmap. Warmer colors indicate
+regions that contributed more strongly to the anomaly score.
 
 <p align="center">
-  <img src="docs/images/defect_image1.png" alt="Fabric sample with two defects" width="250" />
-  <img src="docs/images/fabric-defect-heatmap.png" alt="Heatmap for two fabric defects" width="250" />
-  <img src="docs/images/defect_image2.png" alt="Fabric sample with one defect" width="250" />
-  <img src="docs/images/defect_image2-heatmap.png" alt="Heatmap for one fabric defect" width="250" />
+  <img src="docs/images/defect_image1.png" alt="Fabric sample with two defects" width="320" />
+  <img src="docs/images/fabric-defect-heatmap.png" alt="Heatmap for two fabric defects" width="320" />
 </p>
 
 <p align="center">
-  <em>Two defects</em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <em>Two-defect heatmap</em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <em>One defect</em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <em>Two-defect input</em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <em>Two-defect heatmap</em>
+</p>
+
+<p align="center">
+  <img src="docs/images/defect_image2.png" alt="Fabric sample with one defect" width="320" />
+  <img src="docs/images/defect_image2-heatmap.png" alt="Heatmap for one fabric defect" width="320" />
+</p>
+
+<p align="center">
+  <em>One-defect input</em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <em>Single-defect heatmap</em>
 </p>
 
