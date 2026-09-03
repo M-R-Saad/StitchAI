@@ -6,6 +6,30 @@
 
 **Team HexaMind** · United International University · BCOLBD 2026 AI Category
 
+## Project idea
+
+Bangladesh's ready-made garment (RMG) industry depends on consistent product quality,
+safe working conditions, and reliable production equipment. A missed fabric defect can
+affect an entire order, an unsafe condition can put workers at risk, and visible machine
+wear can lead to downtime or costly repairs.
+
+StitchAI is designed as one practical inspection pipeline for all three problems. A
+supervisor uploads a photo of fabric, a safety condition, or machinery; the system returns
+an anomaly score, highlights suspicious regions, and optionally explains the result in
+plain language. A human remains responsible for the final decision.
+
+## Why it matters for Bangladesh
+
+- **Protects quality and buyer trust:** Earlier defect detection can reduce rework,
+  waste, rejected batches, and delays.
+- **Supports safer factories:** Visual safety checks can help teams spot recognizable
+  PPE and workplace risks during routine inspections.
+- **Reduces maintenance blind spots:** A visible warning sign on equipment can be logged
+  and reviewed before it becomes a larger production problem.
+- **Fits real data constraints:** Many factories cannot create large, labeled datasets
+  for every new defect. StitchAI uses one shared vision-language model and a small bank of
+  normal reference images for each inspection category.
+
 StitchAI combines one AnomalyCLIP backbone with small category-specific reference banks.
 Upload an image through the Streamlit dashboard, receive a normal/anomalous verdict and
 score, inspect the heatmap, and keep the result in a unified audit log.
