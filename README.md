@@ -35,6 +35,22 @@ anomaly score. This is an inspection aid for a human reviewer, not an autonomous
   <em>Anomaly heatmap overlay</em>
 </p>
 
+### Defect localization example
+
+This second fabric example shows two elongated regions receiving the strongest anomaly
+response. The dashboard reports a high-confidence defect and keeps the final decision
+with the inspector.
+
+<p align="center">
+  <img src="docs/images/fabric-defect-input.png" alt="Fabric defect input" width="320" />
+  <img src="docs/images/fabric-defect-heatmap.png" alt="Fabric defect heatmap" width="320" />
+</p>
+
+<p align="center">
+  <em>Defect input</em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <em>Localized anomaly response</em>
+</p>
+
 ### Other inspection categories
 
 <p align="center">
