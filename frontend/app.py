@@ -1011,7 +1011,7 @@ if active_nav == "Run Inspection":
         )
         c_prev_img, c_prev_meta = st.columns([1.1, 1], gap="medium")
         with c_prev_img:
-            st.image(st.session_state.current_image_bytes, use_container_width=True)
+            st.image(st.session_state.current_image_bytes, use_column_width=True)
         with c_prev_meta:
             file_kb = len(st.session_state.current_image_bytes) / 1024
             st.markdown(
@@ -1079,16 +1079,16 @@ if active_nav == "Run Inspection":
                 v1, v2 = st.columns(2)
                 with v1:
                     st.caption(f"Raw Input: {st.session_state.current_image_name}")
-                    st.image(st.session_state.current_image_bytes, use_container_width=True)
+                    st.image(st.session_state.current_image_bytes, use_column_width=True)
                 with v2:
                     st.caption("Anomaly Heatmap Overlay")
                     if res.get("heatmap_url"):
-                        st.image(f"{BACKEND_URL}{res['heatmap_url']}", use_container_width=True)
+                        st.image(f"{BACKEND_URL}{res['heatmap_url']}", use_column_width=True)
                     else:
                         st.info("No heatmap layer needed for normal verdict.")
             with v_tab2:
                 if res.get("heatmap_url"):
-                    st.image(f"{BACKEND_URL}{res['heatmap_url']}", use_container_width=True)
+                    st.image(f"{BACKEND_URL}{res['heatmap_url']}", use_column_width=True)
                 else:
                     st.info("Heatmap is clean. No localized anomalies detected.")
             st.markdown('</div>', unsafe_allow_html=True)
@@ -1158,7 +1158,7 @@ if active_nav == "Run Inspection":
             cols = st.columns(min(len(ref_files), 5))
             for i, r_file in enumerate(ref_files[:5]):
                 with cols[i]:
-                    st.image(r_file, caption=os.path.basename(r_file), use_container_width=True)
+                    st.image(r_file, caption=os.path.basename(r_file), use_column_width=True)
         else:
             st.info(f"No baseline images found in {current_cat['ref_path']}.")
 

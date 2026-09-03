@@ -17,6 +17,9 @@ open_clip_torch==2.26.1
 ftfy==6.2.3
 regex==2024.7.24
 
+# ---- Safety detector (YOLOv8 for PPE compliance) ----
+ultralytics>=8.0.0
+
 # ---- Image handling ----
 Pillow==10.4.0
 opencv-python-headless==4.10.0.84

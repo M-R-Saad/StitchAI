@@ -16,7 +16,9 @@ categories:
   safety:
     reference_bank_dir: data/reference_bank/safety
     threshold: 0.5
-    enabled: false          # flip on in Phase 3
+    enabled: true
+    detection_method: yolo   # uses SafetyDetector (YOLOv8) instead of AnomalyCLIP
+    yolo_weights_path: data/raw/ppe_safety/results_yolov8n_100e/kaggle/working/runs/detect/train/weights/best.pt
   machinery:
     reference_bank_dir: data/reference_bank/machinery
     threshold: 0.99   # data-driven: good max=0.9893, scratch mean=0.9906 (see PROGRESS.md)
