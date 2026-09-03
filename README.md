@@ -1,25 +1,98 @@
 # StitchAI
 
-**A Zero-Shot/Few-Shot Vision-Language Framework for Unified Defect, Safety, and Machinery Anomaly Detection in Bangladesh's Garment Sector**
+> [!NOTE]
+> A zero-shot/few-shot vision-language inspection platform for fabric defects, worker
+> safety, and machinery anomalies in Bangladesh's garment sector.
 
-Team: HexaMind | United International University
-Competition: BCOLBD 2026 — AI Category
+**Team HexaMind** · United International University · BCOLBD 2026 AI Category
 
-## What this is
+## Project idea
 
-One shared vision-language anomaly-detection backbone (AnomalyCLIP), adapted via small
-per-category "few-shot reference banks" (3–5 normal images) to cover three RMG inspection
-tasks — fabric quality, worker safety, and machinery wear — through a single pipeline,
-with a decoupled plain-language explanation layer and a unified audit log.
+Bangladesh's ready-made garment (RMG) industry depends on consistent product quality,
+safe working conditions, and reliable production equipment. A missed fabric defect can
+affect an entire order, an unsafe condition can put workers at risk, and visible machine
+wear can lead to downtime or costly repairs.
 
-See `docs/whitepaper.pdf` for the full write-up and `docs/demo_script.md` (to be filled in
-during Phase 7) for the live-demo walkthrough.
+StitchAI is designed as one practical inspection pipeline for all three problems. A
+supervisor uploads a photo of fabric, a safety condition, or machinery; the system returns
+an anomaly score, highlights suspicious regions, and optionally explains the result in
+plain language. A human remains responsible for the final decision.
+
+## Why it matters for Bangladesh
+
+- **Protects quality and buyer trust:** Earlier defect detection can reduce rework,
+  waste, rejected batches, and delays.
+- **Supports safer factories:** Visual safety checks can help teams spot recognizable
+  PPE and workplace risks during routine inspections.
+- **Reduces maintenance blind spots:** A visible warning sign on equipment can be logged
+  and reviewed before it becomes a larger production problem.
+- **Fits real data constraints:** Many factories cannot create large, labeled datasets
+  for every new defect. StitchAI uses one shared vision-language model and a small bank of
+  normal reference images for each inspection category.
+
+StitchAI combines one AnomalyCLIP backbone with small category-specific reference banks.
+Upload an image through the Streamlit dashboard, receive a normal/anomalous verdict and
+score, inspect the heatmap, and keep the result in a unified audit log.
+
+## At a glance
+
+| Inspection area | What the prototype checks | Reference bank |
+| --- | --- | --- |
+| Fabric | Surface defects and irregular texture | `data/reference_bank/fabric/` |
+| Worker safety | PPE and unsafe visual conditions | `data/reference_bank/safety/` |
+| Machinery | Wear and surface anomalies | `data/reference_bank/machinery/` |
+
+## Defect examples
+
+These uploaded fabric samples contain visible surface defects detected during inspection.
+Each real input is shown beside its corresponding anomaly heatmap. Warmer colors indicate
+regions that contributed more strongly to the anomaly score.
+
+<p align="center">
+  <img src="docs/images/defect_image1.png" alt="Fabric sample with two defects" width="320" />
+  <img src="docs/images/fabric-defect-heatmap.png" alt="Heatmap for two fabric defects" width="320" />
+</p>
+
+<p align="center">
+  <em>Two-defect input</em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <em>Two-defect heatmap</em>
+</p>
+
+<p align="center">
+  <img src="docs/images/defect_image2.png" alt="Fabric sample with one defect" width="320" />
+  <img src="docs/images/defect_image2-heatmap.png" alt="Heatmap for one fabric defect" width="320" />
+</p>
+
+<p align="center">
+  <em>One-defect input</em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <em>Single-defect heatmap</em>
+</p>
+
+### Other inspection categories
+
+<p align="center">
+  <img src="docs/images/safety-example.jpg" alt="Worker safety inspection example" width="250" />
+  <img src="docs/images/machinery-example.png" alt="Machinery inspection example" width="250" />
+</p>
+
+<p align="center">
+  <strong>Worker safety inspection</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <strong>Machinery anomaly inspection</strong>
+</p>
+
+<p align="center">
+  <em>Visual safety screening for recognizable PPE and workplace conditions.</em><br />
+  <em>Machinery category shown as an MVTec-AD proof-of-concept proxy.</em>
+</p>
 
 ## Status
 
-This is a **Phase 0 skeleton** — folder structure and stub code matching the architecture
-described in the whitepaper. Nothing here is trained or wired up yet. Build order follows
-the phased workflow below; each phase leaves you with something demoable.
+This is an active **prototype**. The upload dashboard, FastAPI inference route, reference
+banks, generated heatmaps, explanation fallback, and unified logs are wired together. The
+model and thresholds still require broader validation before production use.
+
+See `docs/01_PROJECT_OVERVIEW.md` for the full project context and `docs/03_WORKFLOW.md`
+for the development workflow.
 
 ## Repository layout
 
@@ -52,6 +125,12 @@ pip install -r requirements.txt
 cp .env.example .env            # then fill in GEMINI_API_KEY etc.
 ```
 
+On Windows PowerShell, activate the environment with:
+
+```powershell
+.\venv\Scripts\Activate.ps1
+```
+
 Clone the official AnomalyCLIP implementation into `backbone/anomalyclip/` (see that
 folder's own README for the expected layout) — it's kept out of `requirements.txt`
 since it's used as source, not an installable package.
@@ -62,11 +141,16 @@ since it's used as source, not an installable package.
 uvicorn backend.main:app --reload --port 8000
 ```
 
+Check that it is ready at `http://localhost:8000/health`.
+
 ### Run the frontend
 
 ```bash
 streamlit run frontend/app.py
 ```
+
+Open the dashboard at `http://localhost:8501`. Start the backend before uploading an
+image so the frontend can reach `/infer` and `/logs`.
 
 ## Build order
 
