@@ -75,6 +75,16 @@ regions that contributed more strongly to the anomaly score.
   <img src="docs/images/machinery-example.png" alt="Machinery inspection example" width="250" />
 </p>
 
+<p align="center">
+  <strong>Worker safety inspection</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <strong>Machinery anomaly inspection</strong>
+</p>
+
+<p align="center">
+  <em>Visual safety screening for recognizable PPE and workplace conditions.</em><br />
+  <em>Machinery category shown as an MVTec-AD proof-of-concept proxy.</em>
+</p>
+
 ## Status
 
 This is an active **prototype**. The upload dashboard, FastAPI inference route, reference
