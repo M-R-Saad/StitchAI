@@ -1,5 +1,6 @@
 # StitchAI
 
+> [!NOTE]
 > A zero-shot/few-shot vision-language inspection platform for fabric defects, worker
 > safety, and machinery anomalies in Bangladesh's garment sector.
 
