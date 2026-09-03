@@ -35,20 +35,19 @@ anomaly score. This is an inspection aid for a human reviewer, not an autonomous
   <em>Anomaly heatmap overlay</em>
 </p>
 
-### Defect localization example
+### Additional defect samples
 
-This second fabric example shows two elongated regions receiving the strongest anomaly
-response. The dashboard reports a high-confidence defect and keeps the final decision
-with the inspector.
+These uploaded fabric samples contain visible surface defects detected during inspection.
+They are shown as input examples; the model's localization output is shown above.
 
 <p align="center">
-  <img src="docs/images/fabric-defect-input.png" alt="Fabric defect input" width="320" />
-  <img src="docs/images/fabric-defect-heatmap.png" alt="Fabric defect heatmap" width="320" />
+  <img src="docs/images/defect_image1.png" alt="Fabric sample with two defects" width="320" />
+  <img src="docs/images/defect_image2.png" alt="Fabric sample with one defect" width="320" />
 </p>
 
 <p align="center">
-  <em>Defect input</em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <em>Localized anomaly response</em>
+  <em>Two defect regions</em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <em>Single defect region</em>
 </p>
 
 ### Other inspection categories
