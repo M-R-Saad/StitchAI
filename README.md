@@ -92,8 +92,8 @@ regions that contributed more strongly to the anomaly score.
 ### Safety Examples
 
 <p align="center">
-  <img src="docs/images/safety_1.png" alt="Safety sample with violations" width="320" />
-  <img src="docs/images/safety1_heatmap.png" alt="Bounding Box for violations" width="320" />
+  <img src="docs/images/safety_1.jpg" alt="Safety sample with violations" width="320" />
+  <img src="docs/images/safety1_bounding_box.png" alt="Bounding Box for violations" width="320" />
 </p>
 
 <p align="center">
@@ -101,7 +101,7 @@ regions that contributed more strongly to the anomaly score.
 </p>
 
 <p align="center">
-  <img src="docs/images/safety_good.png" alt="Safety sample without violations" width="320" />
+  <img src="docs/images/safety_good.jpg" alt="Safety sample without violations" width="320" />
   <img src="docs/images/safety_good_heatmap.png" alt="Bounding Box for no violations" width="320" />
 </p>
 
