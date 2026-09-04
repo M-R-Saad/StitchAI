@@ -134,11 +134,20 @@ def run_inference(image_path: str, category: str, original_filename: str = None)
     else:
         heatmap_path = _save_heatmap(result.heatmap, image_path) if result.heatmap is not None else None
 
+    # image_id keys the cached-fallback explanation lookup (explanation/cached_explanations/
+    # <image_id>.txt) - use the original uploaded filename's stem so pre-selected demo
+    # images (see Phase 7 "safe path" images) actually match a cached file if the live
+    # Gemini call fails. Falls back to the temp file's stem for non-demo uploads (which
+    # simply won't have a cached match, and will correctly get the generic message).
+    image_id = Path(original_filename).stem if original_filename else Path(image_path).stem
+
     # Build explanation with region description from safety detector if available
     explanation = None
     if verdict == "anomalous":
         region_desc = getattr(result, '_region_description', 'a region flagged by the anomaly heatmap')
-        explanation = explain_anomaly(category=category, score=result.score, region_description=region_desc)
+        explanation = explain_anomaly(
+            category=category, score=result.score, region_description=region_desc, image_id=image_id
+        )
 
     log_ref = original_filename if original_filename else image_path
     _write_log(category=category, score=result.score, verdict=verdict, image_ref=log_ref)
@@ -147,6 +156,7 @@ def run_inference(image_path: str, category: str, original_filename: str = None)
         "category": category,
         "verdict": verdict,
         "score": result.score,
+        "threshold": threshold,
         "heatmap_path": heatmap_path,
         "explanation": explanation,
         "timestamp": datetime.now(timezone.utc).isoformat(),

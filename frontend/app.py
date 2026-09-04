@@ -13,6 +13,7 @@ from datetime import datetime
 import pandas as pd
 import requests
 import streamlit as st
+import yaml
 from PIL import Image
 from dotenv import load_dotenv
 
@@ -713,22 +714,44 @@ st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
 # -----------------------------------------------------------------------------
 # 2. CATEGORY CONFIGURATIONS & STATE
 # -----------------------------------------------------------------------------
+# Fallback thresholds only used if backbone/config.yaml can't be read (e.g. frontend
+# run standalone without the full repo tree) - these are NOT the source of truth.
+# The real per-category thresholds live in backbone/config.yaml; loading them here
+# (rather than hardcoding a second copy) keeps this display in sync with what the
+# backend actually applies. The /infer response also echoes back the exact threshold
+# used for that call (see "threshold" field below) as a second safety net.
+_FALLBACK_THRESHOLDS = {"fabric": 0.5, "safety": 0.5, "machinery": 0.5}
+
+
+def _load_category_thresholds() -> dict:
+    try:
+        with open("backbone/config.yaml") as f:
+            cfg = yaml.safe_load(f)
+        return {
+            cat: cfg["categories"][cat].get("threshold", _FALLBACK_THRESHOLDS[cat])
+            for cat in _FALLBACK_THRESHOLDS
+        }
+    except Exception:
+        return dict(_FALLBACK_THRESHOLDS)
+
+
+_THRESHOLDS = _load_category_thresholds()
+
 CATEGORIES = {
     "fabric": {
         "name": "Fabric Quality",
         "icon": "🧵",
         "desc": "Detect weaving defects, stains, holes, and texture anomalies in fabric rolls.",
         "ref_path": "data/reference_bank/fabric",
-        "threshold": 0.35,
+        "threshold": _THRESHOLDS["fabric"],
         "sample_names": ["Plain Weave", "Patterned Twill", "Knit Structure"],
     },
     "safety": {
         "name": "Worker Safety",
         "icon": "🪖",
-        "desc": "Monitor PPE compliance — vests, helmets, and gloves on the factory floor.",
+        "desc": "Monitor PPE compliance — hardhats, masks, and safety vests on the factory floor.",
         "ref_path": "data/reference_bank/safety",
-        "threshold": 0.40,
-        "warning": "PPE tuning in progress — results may be experimental (see PROGRESS.md).",
+        "threshold": _THRESHOLDS["safety"],
         "sample_names": ["Safety Vest Frame", "Floor Inspector", "Worker Baseline"],
     },
     "machinery": {
@@ -736,7 +759,7 @@ CATEGORIES = {
         "icon": "⚙️",
         "desc": "Detect gear wear, cracks, and mechanical defects on sewing & cutting equipment.",
         "ref_path": "data/reference_bank/machinery",
-        "threshold": 0.38,
+        "threshold": _THRESHOLDS["machinery"],
         "info": "Proof of concept — using industrial proxy data (MVTec-AD).",
         "sample_names": ["Drive Gear Normal", "Shaft Bearing", "Motor Mount"],
     },
@@ -1035,6 +1058,9 @@ if active_nav == "Run Inspection":
         res = st.session_state.last_result
         verdict = res.get("verdict", "normal").lower()
         score = float(res.get("score", 0.0))
+        # Prefer the threshold the backend actually applied for this call; fall back to
+        # the config-loaded display value only if an older backend didn't send one yet.
+        applied_threshold = float(res.get("threshold", current_cat["threshold"]))
         is_anomaly = (verdict == "anomalous")
         latency = res.get("latency_ms", 0)
 
@@ -1043,9 +1069,9 @@ if active_nav == "Run Inspection":
         badge_text = "DEFECT DETECTED" if is_anomaly else "QUALITY PASSED"
         hero_title = "ANOMALY DETECTED — HOLD BATCH" if is_anomaly else "NORMAL — CLEAR FOR PRODUCTION"
         hero_desc = (
-            f"Confidence score {score*100:.1f}% exceeds category threshold ({current_cat['threshold']*100:.0f}%). Visual inspection recommended."
+            f"Confidence score {score*100:.1f}% exceeds category threshold ({applied_threshold*100:.0f}%). Visual inspection recommended."
             if is_anomaly else
-            f"Confidence score {score*100:.1f}% is within acceptable normal parameters (< {current_cat['threshold']*100:.0f}%)."
+            f"Confidence score {score*100:.1f}% is within acceptable normal parameters (< {applied_threshold*100:.0f}%)."
         )
 
         # Verdict Hero Banner

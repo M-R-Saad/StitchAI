@@ -12,6 +12,7 @@ class InferenceResponse(BaseModel):
     category: str
     verdict: str            # "normal" | "anomalous"
     score: float
+    threshold: float        # the actual threshold applied for this call (from config.yaml)
     heatmap_url: Optional[str] = None
     explanation: Optional[str] = None  # only populated when verdict == "anomalous"
     timestamp: str

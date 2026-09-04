@@ -87,7 +87,9 @@ class SafetyDetector:
         if not self._loaded:
             raise RuntimeError("Model not loaded — call .load() first")
 
-        results = self._model(image_path, conf=self.confidence_threshold, verbose=False)
+        results = self._model(
+            image_path, conf=self.confidence_threshold, device=self.device, verbose=False
+        )
         detections = []
 
         for result in results:
